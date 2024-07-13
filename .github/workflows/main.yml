@@ -1,36 +1,26 @@
 name: Node.js CI
 
-on:
-  push:
-    branches:
-      - main
-      
-jobs:
-  build:
+on: push: branches: - main pull_request: branches: - main
 
-    runs-on: ubuntu-latest
+jobs: build:
 
-    strategy:
-      matrix:
-        node-version: [20.x]
+runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout Suhail-Md repository
-      uses: actions/checkout@v3
+strategy:
+  matrix:
+    node-version: [20.x]
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+steps:
+- name: Checkout repository
+  uses: actions/checkout@v3
 
-    - name: Install libraries
-      run: npm install
+- name: Set up Node.js
+  uses: actions/setup-node@v3
+  with:
+    node-version: ${{ matrix.node-version }}
 
-    - name: Start Suhail-Md
-    
-      env:
-          OWNER_NAME: 
-          OWNER_NUMBER:
-          SESSION_ID:
+- name: Install dependencies
+  run: npm install
 
-      run: npm start￼Enter
+- name: Start application
+  run: npm start
